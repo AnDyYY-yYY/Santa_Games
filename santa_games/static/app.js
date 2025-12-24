@@ -57,8 +57,18 @@ async function handleMove(direction) {
 }
 
 function render(payload, addHistory = false) {
-  const { board, status, message, history, bag, delivered, winsAt, remainingMoves, isWon } =
-    payload;
+  const {
+    board,
+    status,
+    message,
+    history,
+    bag,
+    delivered,
+    winsAt,
+    remainingMoves,
+    isWon,
+    availableMoves = [],
+  } = payload;
 
   // Grid
   boardEl.style.gridTemplateColumns = `repeat(${board[0].length}, 1fr)`;
@@ -89,6 +99,12 @@ function render(payload, addHistory = false) {
   // Celebrate
   celebrateBtn.setAttribute("aria-disabled", isWon ? "false" : "true");
   celebrateBtn.textContent = isWon ? "🎉 You won! Play again?" : "🎉 Victory dance";
+
+  // Disable impossible moves
+  directionButtons.forEach((btn) => {
+    const dir = btn.dataset.direction;
+    btn.disabled = !availableMoves.includes(dir);
+  });
 }
 
 fetchState().catch((err) => {

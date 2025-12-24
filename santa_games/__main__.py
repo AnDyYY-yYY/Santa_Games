@@ -22,6 +22,10 @@ def _print_map(game: SantaGame) -> None:
     print("Current map:")
     print(game.render())
     print(game.status())
+    if game.available_moves():
+        print(f"Open paths: {', '.join(m.upper() for m in game.available_moves())}")
+    else:
+        print("No open paths—better backtrack!")
 
 
 def _prompt(commands: Iterable[str]) -> str:

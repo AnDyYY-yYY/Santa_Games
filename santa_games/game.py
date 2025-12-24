@@ -93,11 +93,19 @@ class SantaGame:
         """Move Santa in the specified direction if possible."""
         direction = direction.lower()
         if direction not in DELTAS:
-            return "Unknown direction. Use N, S, E, or W."
+            message = "Unknown direction. Use N, S, E, or W."
+            self.history.append(message)
+            return message
 
         target = self._target_cell(direction)
         if not self._is_walkable(target):
-            return "A snowbank blocks the path!"
+            options = ", ".join(m.upper() for m in self.available_moves())
+            message = (
+                f"A snowbank blocks the path! "
+                f"{'Try: ' + options if options else 'No paths open.'}"
+            )
+            self.history.append(message)
+            return message
 
         self.santa_pos = target
         self.moves += 1
@@ -151,6 +159,14 @@ class SantaGame:
     def is_over(self) -> bool:
         return self.is_won or self.is_lost
 
+    def available_moves(self) -> List[str]:
+        """Return list of directions that are walkable from current position."""
+        options = []
+        for d, delta in DELTAS.items():
+            if self._is_walkable(self._target_cell(d)):
+                options.append(d)
+        return options
+
     def status(self) -> str:
         if self.is_won:
             return "Victory! Every house received a gift. 🎄"
@@ -158,7 +174,8 @@ class SantaGame:
             return "The night ended before Santa finished deliveries."
         return (
             f"Bag: {self.bag} | Delivered: {self.delivered}/{self._wins_at} | "
-            f"Moves left: {self.remaining_moves}"
+            f"Moves left: {self.remaining_moves} | "
+            f"Open paths: {', '.join(m.upper() for m in self.available_moves()) or 'None'}"
         )
 
     def to_dict(self) -> Dict:

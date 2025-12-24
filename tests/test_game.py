@@ -39,6 +39,7 @@ def test_cannot_walk_through_walls():
     result = game.move("n")
     assert "snowbank" in result.lower()
     assert game.moves == 0  # Move should not count
+    assert game.history  # Logged for player feedback
 
 
 def test_victory_when_all_gifts_delivered():
@@ -87,3 +88,9 @@ def test_board_cells_shapes_match_grid():
     cells = game.board_cells()
     assert len(cells) == len(game.grid)
     assert all(len(row) == len(game.grid[0]) for row in cells)
+
+
+def test_available_moves_from_start():
+    game = SantaGame()
+    moves = set(game.available_moves())
+    assert moves == {"e", "s"}

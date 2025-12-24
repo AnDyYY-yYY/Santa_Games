@@ -66,6 +66,7 @@ def game_payload(game: SantaGame, message: str | None = None) -> Dict:
         "moves": game.moves,
         "maxMoves": game.max_moves,
         "remainingMoves": game.remaining_moves,
+        "availableMoves": game.available_moves(),
         "bag": game.bag,
         "delivered": game.delivered,
         "winsAt": getattr(game, "_wins_at", len(game.gifts)),
