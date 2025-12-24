@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Santa Delivery Run</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Holiday mode</p>
+          <h1>Santa's Delivery Run</h1>
+          <p class="lede">
+            Collect gifts, dash through the map, and drop off every present before the snowstorm hits.
+          </p>
+          <div class="cta-row">
+            <button id="new-game" class="button primary">Start fresh</button>
+            <button id="look" class="button ghost">Refresh board</button>
+          </div>
+        </div>
+        <div class="stats">
+          <div class="stat-card">
+            <p class="label">Moves left</p>
+            <p class="value" id="moves-left">—</p>
+          </div>
+          <div class="stat-card">
+            <p class="label">Gifts in bag</p>
+            <p class="value" id="bag-count">—</p>
+          </div>
+          <div class="stat-card">
+            <p class="label">Delivered</p>
+            <p class="value" id="delivered-count">—</p>
+          </div>
+        </div>
+      </header>
+
+      <main class="grid-shell">
+        <section class="board-card glass">
+          <div class="board-header">
+            <div>
+              <p class="label">North is up</p>
+              <h2>Snowy streets</h2>
+            </div>
+            <div class="legend">
+              <span class="legend-item"><span class="chip santa"></span> Santa</span>
+              <span class="legend-item"><span class="chip gift"></span> Gift</span>
+              <span class="legend-item"><span class="chip house"></span> House</span>
+              <span class="legend-item"><span class="chip wall"></span> Wall</span>
+            </div>
+          </div>
+          <div id="board" class="board"></div>
+          <p id="status" class="status-text"></p>
+        </section>
+
+        <section class="controls-card glass">
+          <h2>Controls</h2>
+          <p>Tap an arrow or use WASD/arrow keys.</p>
+          <div class="controls">
+            <button class="control-button" data-direction="n">↑</button>
+            <div class="control-row">
+              <button class="control-button" data-direction="w">←</button>
+              <button class="control-button" data-direction="s">↓</button>
+              <button class="control-button" data-direction="e">→</button>
+            </div>
+          </div>
+          <button id="celebrate" class="button ghost" aria-disabled="true">🎉 Victory dance</button>
+          <div class="message" id="message"></div>
+          <ul id="history" class="history"></ul>
+        </section>
+      </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+  </body>
+</html>
