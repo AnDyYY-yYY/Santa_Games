@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Santa's Night Dash</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="snow"></div>
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Holiday Mini-Game</p>
+        <h1>Santa's Night Dash</h1>
+        <p class="lede">
+          Collect gifts, sip cocoa for energy, slide across icy tiles, and deliver every
+          present before dawn.
+        </p>
+        <div class="cta-row">
+          <button id="restart" class="primary">Restart</button>
+          <span class="hint">Use arrow keys or WASD to move.</span>
+        </div>
+      </div>
+      <div class="status-cards">
+        <div class="card">
+          <p class="label">Moves left</p>
+          <p class="value" id="moves-left">--</p>
+        </div>
+        <div class="card">
+          <p class="label">Bag</p>
+          <p class="value" id="bag-count">--</p>
+        </div>
+        <div class="card">
+          <p class="label">Delivered</p>
+          <p class="value" id="delivered-count">--</p>
+        </div>
+        <div class="card">
+          <p class="label">Holiday cheer</p>
+          <p class="value" id="cheer-score">--</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="board-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">North Pole Map</p>
+            <h2>Deliver the cheer</h2>
+          </div>
+          <div class="legend">
+            <span>🎅 Santa</span>
+            <span>🎁 Gift</span>
+            <span>🏠 House</span>
+            <span>☕ Cocoa (+moves +cheer)</span>
+            <span>🧊 Ice slide</span>
+            <span>⬛ Snowbank</span>
+          </div>
+        </div>
+        <div id="board" class="board" role="grid" aria-label="Santa game board"></div>
+        <div class="controls">
+          <div class="dpad">
+            <button data-dir="n" aria-label="Move North">↑</button>
+            <div class="dpad-row">
+              <button data-dir="w" aria-label="Move West">←</button>
+              <button data-dir="s" aria-label="Move South">↓</button>
+              <button data-dir="e" aria-label="Move East">→</button>
+            </div>
+          </div>
+          <div class="cta-row">
+            <p class="hint">Goal: Deliver every gift before you run out of moves.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="log-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Mission Feed</p>
+            <h2>Recent events</h2>
+          </div>
+          <button id="clear-log" class="ghost">Clear</button>
+        </div>
+        <ul id="log" class="log" aria-live="polite"></ul>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="game.js"></script>
+  </body>
+</html>
